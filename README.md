@@ -18,21 +18,26 @@ The National Center for Education Statistics (2019) serves as a primary data sou
 Perktold (2023) provides documentation on the statsmodels library, specifically focusing on the OLS (Ordinary Least Squares) regression. This technical resource is instrumental in the methodological approach, guiding the implementation of regression analysis for predicting education budget allocations (Perktold, 2023).
 Roza (2022) addresses the vital aspect of effective communication in school finance. As I navigate through statistical analyses, this source provides an important reminder about the need of clear communication to engage stakeholders, foster transparency, and build trust in the context of education budget discussions (Roza, 2022). 
 Collectively, these sources synthesize key concepts, methodologies, and insights regarding data science and effective communication of results. They lay the groundwork for the study on education budget allocations, emphasizing the interdisciplinary nature of the research and the need for a holistic understanding of statistical techniques, data sources, and effective communication strategies. At the same time, these sources highlight the lack of formal data analysis and resulting discourse in the field of education. Thus, the aim of this study is to begin filling that gap and spark further discussion of the utility of data science in this sector.
-### Presentation of the Data
+## Presentation of the Data
 In my pursuit of data for the study on education budget allocations in Kentucky, I encountered challenges in obtaining comprehensive information on student enrollment, socio-economic status, and teacher-student ratios across all districts. Initially, I faced the obstacle of a lack of readily available datasets specific to my variables of interest. To address this issue, I turned to the National Center for Education Statistics (NCES) as a reliable source for education-related data. However, the nature of collecting data for all 187 districts in Kentucky posed practical difficulties. To overcome this, I created a random sample comprising 30 districts. I selected random sampling in this context as it provides a representative subset of the entire population, allowing for generalizability of findings to the broader set of districts in Kentucky. This method ensures that the selected districts are not biased, providing a more accurate and efficient approach to data collection and analysis (Favero & Belfiore, 2019). 
 After obtaining a random sample of 30 districts, I began to explore the data. I first began by importing packages that I would need for my analysis: 
 
-
+```
 import pandas as pd
+
 import matplotlib.pyplot as plt
+
 import seaborn as sns
 
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn import metrics
-import numpy as np
-import statsmodels.api as sm
 
+from sklearn.linear_model import LinearRegression
+
+from sklearn import metrics
+
+import numpy as np
+
+import statsmodels.api as sm```
 
 
 Next, using the pandas package, I loaded my data:
@@ -41,12 +46,13 @@ Next, using the pandas package, I loaded my data:
 
 
 Next, I displayed the first 5 rows of my data set to get an overview:
+
 ```df.head()```
 
 
 This output highlights the attributes shown in the data set. For this study, I will be focusing on the following attributes: Total Revenue, number of students, Student Teacher Ratio, and % of families below poverty level. I further investigated the dataframe by looking at the classification of each attribute: 
 
-```df.info()``
+```df.info()```
 
 
 In this output, I notice two attribute types that will cause issues in my data analysis. Both Total Revenue and number of students are considered objects, when I need these attributes to be numerical. However, there are no missing values in the data set, as seen by the 30 non-null output. This means that I will not have to clean the data set to remove missing values. 
