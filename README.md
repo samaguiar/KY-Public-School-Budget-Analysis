@@ -22,7 +22,6 @@ Collectively, these sources synthesize key concepts, methodologies, and insights
 In my pursuit of data for the study on education budget allocations in Kentucky, I encountered challenges in obtaining comprehensive information on student enrollment, socio-economic status, and teacher-student ratios across all districts. Initially, I faced the obstacle of a lack of readily available datasets specific to my variables of interest. To address this issue, I turned to the National Center for Education Statistics (NCES) as a reliable source for education-related data. However, the nature of collecting data for all 187 districts in Kentucky posed practical difficulties. To overcome this, I created a random sample comprising 30 districts. I selected random sampling in this context as it provides a representative subset of the entire population, allowing for generalizability of findings to the broader set of districts in Kentucky. This method ensures that the selected districts are not biased, providing a more accurate and efficient approach to data collection and analysis (Favero & Belfiore, 2019). 
 After obtaining a random sample of 30 districts, I began to explore the data. I first began by importing packages that I would need for my analysis: 
 
-```
 import pandas as pd
 
 import matplotlib.pyplot as plt
@@ -37,7 +36,7 @@ from sklearn import metrics
 
 import numpy as np
 
-import statsmodels.api as sm```
+import statsmodels.api as sm
 
 
 Next, using the pandas package, I loaded my data:
@@ -66,27 +65,32 @@ In this code, I also added errors='coerce' to ensure that any errors would be tr
 
 
 Lastly, I transformed the attributes into integer values to be able to complete numerical calculations: 
+
 ```df['Total Revenue'] = df['Total Revenue'].astype(int)
+
 df['number of students'] = df['number of students'].astype(int)```
 
 
 To ensure that the attributes are now numerical, I used the following code to get a numerical summary of each attribute:
-```df.describe()```
 
+```df.describe()```
 
 
 Since both attributes are included in the numerical summary, I know that the data has been transformed to a numerical value. 
 I used the Seaborn library's pairplot function on the dataframe to conduct a visual examination of the relationships between variables:
+
 ```sns.pairplot(df)```
 
 
 The pairplot generated a matrix of scatterplots, allowing for a comprehensive visual exploration of how each variable correlates with every other variable in the dataset (Perktold, 2022). Many of the attributes showed little to no correlation, except for the scatter plots comparing:
 - Number of students vs. Total Revenue; and
 - Number of schools vs. Total Revenue. 
+
 This indicates that Total Revenue may be highly determined by the amount of students that the school district needs to serve, meaning the larger the district, the larger the budget.
 
 ## Analysis
 After understanding my dataframe and attributes in consideration, I proceeded to begin my analysis. I wanted to use a linear regression model to predict the Total Revenue in an educational context. First, I defined the attributes I wanted to use to conduct my multivariable analysis:
+
 ```X = df[['number of students', 'Student Teacher Ratio', 'total number of schools', '%of families below poverty level']]
 y = df['Total Revenue']```
 
@@ -172,6 +176,7 @@ alpha = 0.05```
 
 
 Hypothesis testing was subsequently performed on the coefficients to discern the significance of each variable in influencing the education budget allocations. This analytical approach provided a robust foundation for identifying key variables that significantly contribute to the model's predictive capabilities:
+
 ```# Perform hypothesis testing
 significant_vars = p_values[p_values < alpha].index
 
@@ -185,9 +190,11 @@ However, the other independent variables, namely Student Teacher Ratio, total nu
 The condition number of 2.09e+05 raises concerns about multicollinearity, indicating potential numerical problems in the model. It is crucial to address multicollinearity, as it can impact the reliability of coefficient estimates. The identified significant variable, number of students, aligns with the results of the hypothesis testing mentioned earlier. (Bhandari, 2019).
 
 ## Summary of Results and Next Steps
+
 The number of students emerges as a significant factor influencing the Total Revenue allocated to each district. The significant F-statistic allows the rejection of the null hypothesis, indicating that at least one independent variable plays a substantial role in explaining the variance in the dependent variable. The presence of considerable errors in the model is notable, suggesting potential multicollinearity. To enhance the robustness of the analysis, I would want to address outliers in the dataset, consider a larger sample size for Kentucky, and expand the scope to include data for the entire United States. Additionally, experimenting with the inclusion or exclusion of variables such as the number of ML students, types of revenue, or the number of schools in the district could provide insights into how significance changes and contribute to a more comprehensive understanding of the factors influencing Total Revenue. The rejection of the null hypothesis and acceptance of the alternative hypothesis underscore the importance of the number of students as a significant predictor of Total Revenue in each district.
 
 ## Conclusion
+
 In conclusion, this study aimed to investigate the dynamics of education budget allocations in Kentucky's school districts by employing Multiple Regression Analysis. The investigation looked into the relationships among variables such as student enrollment, socio-economic status, and teacher-student ratios, aiming to understand their collective influence on annual district budgets.
 The literature review drew insights from various sources, including discussions on multicollinearity, data science applications in decision-making, public school finance data, regression analysis, and effective communication in school finance. The study identified key challenges, such as the practical difficulties in obtaining comprehensive data and the need for effective communication to bridge knowledge gaps among stakeholders.
 Upon presenting the data, challenges in obtaining comprehensive information led to the use of a random sample of 30 districts. The data preparation involved addressing data type issues, transforming attributes into numerical variables, and conducting visual explorations through pairplots and scatter plots.
